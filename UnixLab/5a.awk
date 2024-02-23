@@ -36,4 +36,5 @@ else
 	print arr[3]
 	
 }
+exit 0
 }
