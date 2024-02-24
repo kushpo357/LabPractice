@@ -1,0 +1,10 @@
+These are answers for the 11th question
+
+11.i) sed "/dept/,/\dept/d" sample.xml >student.xml
+
+11.ii) vi change.sh
+sed "/dept/./\dept/s/name/deptname/g" sample.xml >dept.xml
+sh change.sh
+
+11.iii) sed -n '/usn/{s/.*<USN>//;s/<\/usn.*//;p;}' sample.xml
+sed -n '/usn/{s/.*<USN>//;s/<\/usn.*//;p;}' sample.xml >usn.txt
