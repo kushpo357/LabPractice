@@ -1,0 +1,89 @@
+12. Docker
+a. Docker Installation and set up
+Docker can be installed by using following i), ii) and iii) steps in terminal.
+
+Make sure you are a root user.
+
+Before you install Docker Engine for the first time on a new host machine, you need to set
+up the Docker repository. Afterward, you can install and update Docker from the repository.
+i) Setup Docker’s apt repository
+# Add Docker&#39;s official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o
+/etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+# Add the repository to Apt sources:
+echo \
+&quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc]
+https://download.docker.com/linux/ubuntu \
+$(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;) stable&quot; | \
+sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+sudo apt-get update
+
+ii) Install the Docker Packages
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-
+compose-plugin
+
+iii) Verify that the Docker Engine installation is successful by
+running the hello-world image.
+sudo docker run hello-world
+
+Refer the below link for installation.
+https://docs.docker.com/engine/install/ubuntu/
+
+If docker is already installed... Check the version of docker by using below command.
+docker --version
+
+SCREENSHOTS:-
+
+ii) Creating a shell script to pass arguments and run in a container using Docker
+
+vi 1.sh
+#! bin/bash
+arg1=${1}
+arg2=${2}
+arg3=${3}
+while true; do
+echo “Argument1:$arg1”
+echo “Argument 2:$arg2”
+echo “Argument3:$arg3”
+sleep 1
+done
+
+iii) Creating a docker file:
+mkdir dockerfiles
+cd dockerfiles
+ls
+cd ..
+cp 1.sh dockerfiles/
+
+once docker file is created:
+Go to terminal and type
+cd ..
+iv) Then build a docker image by using below cmd in screenshots.
+sudo docker build -t scriptdemo:1.0 “/home/administrator/Desktop/dockerfiles”
+
+Below screenshot you can see the docker image scriptdemo with TAG 1.0 is created.
+
+docker images
+
+v) Now run the docker image, the name is given demo1 in this case, you could specify
+any name.
+docker run --name demo1 -d scriptdemo:1.0
+
+Now check the Container scriptdemo:1.0 is created in below screenshots. (In the first line..
+after CONTAINER ID IMAGE ..line)so here container Id is b67de89b8813
+docker ps -a
+
+Now execute the docker container with container id to get inside docker container.
+docker exec -it b67de89b8813 bin/bash
+
+You are inside a container, you are able to see the script 1.sh also
+
+Now execute script 1.sh with arguments inside container.
+sh 1.sh Hello cybersecurity students
+
+Once execution is done, then just type exit to exit the container.
+exit
